@@ -17,7 +17,7 @@ const computeDeterminant = array => {
         return localDeterminant;
     }
     
-    //Compute determinant for a nxn matrix.
+    //Compute determinant for a 3x3 matrix.
     const nEqualsThree = threeArray => {
         let localDeterminant = 0;
         let sign = -1;
