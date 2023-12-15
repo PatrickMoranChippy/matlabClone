@@ -70,14 +70,49 @@ const computeDeterminant = array => {
     return determinant;
 }
 
+//Compute inverse of a 2x2 matrix.
+const computeInverse = twoArray => {
+    let inverse;
+    
+    //Input validation
+    if (twoArray.length != twoArray[0].length || twoArray.length != twoArray[1].length){
+        console.log("Error - not a square matrix.");
+    } else if (twoArray.length > 2){
+        console.log("Error - not a 2x2 matrix.");
+    } else {
+        inverse = [[(1/computeDeterminant(twoArray)) * twoArray[1][1],(-1/computeDeterminant(twoArray)) * twoArray[0][1]],[(-1/computeDeterminant(twoArray)) * twoArray[1][0],(1/computeDeterminant(twoArray)) * twoArray[0][0]]];
+    }
+    return inverse;
+}
+
+//Compute dot product function.
+const computeDot = (arrayOne, arrayTwo) => {
+    let dotProduct = new Array(arrayOne.length);                        //Initialise array
+    if (arrayOne[0].length != arrayTwo.length){ //ie. If number of columns in arrayOne does not equal number of rows in arrayTwo.
+        console.log("Error - Number of columns in first matrix does not equal number of rows in second matrix.")
+    } else {
+        for(let i = 0; i < arrayOne.length; i++){                       //Row count
+            dotProduct[i] = new Array(arrayTwo[0].length);              //Make a new row
+            for(let j = 0; j < arrayTwo[0].length; j++){                //Element per row
+                dotProduct[i][j] = 0;
+                for (let k = 0; k < arrayOne[0].length; k++){           //Term per element
+                        dotProduct[i][j] += (arrayOne[i][k] * arrayTwo[k][j]);
+                }
+            }
+        }
+    }
+    return dotProduct;
+}
+
 //TEST:
-let testArray = [[1,2,5,6],
-                [4,5,3,2],
-                [7,2,8,0],
-                [5,1,2,7]];
+let testArrayOne = [[1,2],
+                    [4,5],
+                    [-9,-8]];
+let testArrayTwo = [[4,-9,90],
+                    [-3,17,76]];
 //The above test structure is the same as [[[00],[01]],[[10],[11]]...].
 //That is, array[n] contains the rows, and array[n][m] is the data for the row, with [m] changing as the column changes.
 
-let test = computeDeterminant(testArray);
+let test = computeDot(testArrayOne, testArrayTwo);
 
 console.log(test);
